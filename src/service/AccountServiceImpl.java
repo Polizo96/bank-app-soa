@@ -263,7 +263,7 @@ public class AccountServiceImpl implements IAccountService {
         try {
             account = dao.get(id);
 
-            if (!isSsnValid(ssn)) throw new SsnNotValidException(ssn);
+            if (!account.isSsnValid(ssn)) throw new SsnNotValidException(ssn);
             if (amount < 0) throw new NegativeAmountException(amount);
             if (account == null) throw new AccountNotFoundException(id);
             if (amount > account.getBalance()) throw new InsufficientBalanceException(account.getBalance(), amount);
@@ -310,21 +310,5 @@ public class AccountServiceImpl implements IAccountService {
         holder.setFirstname(userDTO.getFirstname());
         holder.setLastname(userDTO.getLastname());
         holder.setSsn(userDTO.getSsn());
-    }
-
-    /**
-     * Checks if the ssn is valid.
-     *
-     * @param ssn
-     *          the given ssn.
-     * @return
-     *          true if is valid, false otherwise.
-     */
-    private boolean isSsnValid(String ssn){
-        Account account = new Account();
-
-        if (ssn == null || account.getHolder().getSsn() == null) return false;
-
-        return account.getHolder().getSsn().equals(ssn);
     }
 }

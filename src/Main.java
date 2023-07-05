@@ -28,6 +28,7 @@ public class Main {
             service.updateAccount(2L,account2DTO);
             service.deposit(account2DTO.getId(),50.0);
             service.deleteAccount(1L);
+            service.withdraw(account2DTO.getId(),account2DTO.getUser().getSsn(),50.0);
 
             List<Account> accounts = service.getAllAccounts();
             for (Account account : accounts) {

@@ -68,4 +68,11 @@ public class Account extends AbstractEntity{
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;
     }
+
+    public boolean isSsnValid(String ssn){
+
+        if (ssn == null || holder.getSsn() == null) return false;
+
+        return holder.getSsn().equals(ssn);
+    }
 }
